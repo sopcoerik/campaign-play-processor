@@ -14,6 +14,10 @@ export const registerRoutes = (app: Express) => {
   app.post("/events", (req: Request, res: Response) => {
     const event: PlayEvent = req.body;
 
+    if (!event.campaign_id || !event.screen_id || !event.timestamp) {
+      return res.status(400).send({ error: "Invalid event data" });
+    }
+
     try {
       client.rPush("events", JSON.stringify(event));
     
