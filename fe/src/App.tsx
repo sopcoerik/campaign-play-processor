@@ -1,7 +1,10 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { SimulateEventButton } from './components/SimulateEventButton';
-import type { Campaign } from './types/Campaign';
+import type { Campaign } from './types';
+import { Header } from './components/Header';
+import { ToggleProcessingButton } from './components/ToggleProcessingButton';
+import { CampaignsList } from './components/CampaignsList';
 
 function App() {
 
@@ -25,16 +28,12 @@ function App() {
   }, [isSimulating])
 
   return (
-    <main>
-      <SimulateEventButton isSimulating={isSimulating} onSimulation={setIsSimulating} />
-      {
-        Object.entries(campaigns).map(([key, value]) => (
-          <div key={key}>
-            <p>{key}</p>
-            <p>{value}</p>
-          </div>
-        ))
-      }
+    <main className='max-w-2xl px-4 py-24 mx-auto space-y-16'>
+      <Header>
+        <SimulateEventButton isSimulating={isSimulating} onSimulation={setIsSimulating} />
+        <ToggleProcessingButton />
+      </Header>
+      <CampaignsList campaigns={campaigns} />
     </main>
   )
 }

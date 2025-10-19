@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, type FC } from "react";
-import type { PlayEvent } from "../types/PlayEvent";
+import type { PlayEvent } from "../types";
 
 const screenIds: string[] = [
   "screen-101",
