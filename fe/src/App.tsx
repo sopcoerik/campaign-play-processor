@@ -58,8 +58,8 @@ const campaignIds = [
 ];
 
 const getRandomEvent = () => {
-  const screen_id = screenIds[Math.floor(Math.random() * screenIds.length) + 1];
-  const campaign_id = campaignIds[Math.floor(Math.random() * campaignIds.length) + 1];
+  const screen_id = screenIds[Math.floor(Math.random() * screenIds.length)];
+  const campaign_id = campaignIds[Math.floor(Math.random() * campaignIds.length)];
   const timestamp = new Date().toISOString();
 
   return { screen_id, campaign_id, timestamp };
