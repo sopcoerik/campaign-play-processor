@@ -9,19 +9,15 @@ export const ToggleProcessingButton = () => {
 
   const handleClick = async () => {
     if (isStopped) {
-      content = "Starting processing...";
 
       await axios.get('http://localhost:3000/start_processing');
 
       setIsStopped(false);
-      content = "Stopping...";
     } else {
-      content = "Stopping processing...";
 
       await axios.get('http://localhost:3000/stop_processing');
 
       setIsStopped(true);
-      content = "Starting...";
     }
   }
 
