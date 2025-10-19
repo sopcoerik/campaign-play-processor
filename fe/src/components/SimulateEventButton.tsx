@@ -86,7 +86,7 @@ export const SimulateEventButton: FC<SimulateEventButtonProps> = ({ isSimulating
   }
 
   return <button className='
-    text-black border border-gray-400 rounded-xl px-2 bg-gray-50 hover:opacity-80 cursor-pointer 
+    text-emerald-600 px-2 hover:opacity-80 cursor-pointer 
     disbled:opacity-50 disabled:cursor-not-allowed
   ' disabled={isClicked} onClick={handleClick}>{isClicked ? 'Simulating...' : 'Simulate Event'}</button>
 }

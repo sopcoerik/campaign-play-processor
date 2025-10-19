@@ -10,7 +10,7 @@ export const Header: FC<HeaderProps> = ({ children }) => {
 
   return (
     <header className={className}>
-      <h1 className="text-xl font-bold">Campaign Play Processor</h1>
+      <h1 className="text-2xl font-bold">Campaign Play Processor</h1>
       <div className={className}>
         {children}
       </div>
