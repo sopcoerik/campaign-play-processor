@@ -15,13 +15,15 @@ function App() {
       setCampaigns(res.data);
     }
     
+    fetchCampaigns();
+
     let interval = -1;
 
     interval = setInterval(fetchCampaigns, 5000);
 
     return () => clearInterval(interval);
   }, [])
-  
+  console.log('campaigns', campaigns);
   return (
     <main className='max-w-2xl px-4 py-24 mx-auto space-y-16'>
       <Header>

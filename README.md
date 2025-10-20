@@ -56,8 +56,6 @@ a Redis queue, and displays real-time campaign statistics on a dashboard.
 ### Bonus Features ✅
 - Pause/Resume processing toggle
 - Bar chart visualization (Recharts)
-- Clean component structure
-- TypeScript for type safety
 
 ## Tech choices
 
@@ -93,18 +91,21 @@ Essential for hot-reloading the server when a change is made in the code.
 For using environment files in the project.
 
 ## Time Spent
-- **Core functionality:** ~3 hours
-- **Polish & bonus features:** ~3 hours (pause/resume, charts, refactoring)
-- **Total:** ~6 hours active development
+- **Learning & Research:** ~3 hours (Redis fundamentals, architecture planning)
+- **Core implementation:** ~3 hours (endpoints, queue processing, basic UI)
+- **Polish & bonus features:** ~3 hours (pause/resume, charts, refactoring, testing)
+- **Total development time:** ~6 hours active coding, ~3 hours research
 
 ## Known issues/Future improvements
 As of right now, I didn't find big issues that would harm the
 functionality of the application.
 The following improvements can (and will be) made in the future:
-  - store events in SQL database
-  - add impressions per screen (visualized)
-  - deploy project
-  - improve UI with shadcnUI or other UI library
-  - testing with Jest/React Testing Library (or Vitest)
-  - other refactors/logic improvements
+  - Store events in SQL database
+  - Add impressions per screen (visualized)
+  - Deploy project
+  - Improve UI with shadcnUI or other UI library
+  - Add comprehensive error handling and retry logic
+  - Implement rate limiting on endpoints
+  - Add unit/integration tests (Jest/Vitest)
+  - Other refactors/logic improvements
   list to be continued...

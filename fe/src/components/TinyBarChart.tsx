@@ -17,8 +17,8 @@ export const TinyBarChart: FC<TinyBarChartProps> = ({ campaigns }) => {
 
   return (
     <BarChart
-      style={{ width: '100%', maxHeight: '300px'}}
-      responsive
+      width={"100%"}
+      height={300}
       data={campaignsToChartData()}
     >
       <Bar dataKey="uv" fill="#8884d8" />
