@@ -12,9 +12,9 @@ export const beginProcess = () => {
       client.del("events");
   
       events.forEach(event => {
-        
+        console.log("Processing event:", event);
         const { campaign_id } = JSON.parse(event);
-  
+        
         client.hIncrBy("campaigns", campaign_id, 1);
   
       });

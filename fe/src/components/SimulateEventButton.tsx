@@ -67,11 +67,11 @@ const getRandomEvent = () => {
 }
 
 type SimulateEventButtonProps = {
-  isSimulating: boolean;
-  onSimulation: (isSimulating: boolean) => void;
+  isSimulating?: boolean;
+  onSimulation?: (isSimulating: boolean) => void;
 }
 
-export const SimulateEventButton: FC<SimulateEventButtonProps> = ({ isSimulating, onSimulation }) => {
+export const SimulateEventButton: FC<SimulateEventButtonProps> = () => {
 
   const [isClicked, setIsClicked] =  useState(false);
 
@@ -81,8 +81,6 @@ export const SimulateEventButton: FC<SimulateEventButtonProps> = ({ isSimulating
     await axios.post('http://localhost:3000/events', getRandomEvent());
 
     setIsClicked(false);
-
-    if (!isSimulating) onSimulation(true);
   }
 
   return <button className='

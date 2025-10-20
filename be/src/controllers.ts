@@ -9,8 +9,6 @@ export const registerRoutes = (app: Express) => {
     res.send("Server is running... Thank you for the opportunity!");
   });
 
-  let isProcessing = false;
-
   app.post("/events", (req: Request, res: Response) => {
     const event: PlayEvent = req.body;
 
@@ -20,17 +18,8 @@ export const registerRoutes = (app: Express) => {
 
     try {
       client.rPush("events", JSON.stringify(event));
-    
-      if (!isProcessing) {
-        isProcessing = true;
-        try {
-          beginProcess();
-        } catch (error) {
-          isProcessing = false;
-          res.status(500).send({ error: "Failed to start processing events" + "\n" + error });
-        }
-      }
-    
+      
+      console.log("Event received: ", event);
       res.status(201).send({ status: "Event received" });
     } catch (error) {
       res.status(500).send({ error: "Failed to receive event" + "\n" + error });
@@ -58,11 +47,11 @@ export const registerRoutes = (app: Express) => {
   });
 
   app.get("/start_processing", (req: Request, res: Response) => {
-  try {
-    beginProcess();
-    res.status(200).send({ status: "Beginning process" });
-  } catch (error) {
-    res.status(500).send({ error: "Failed to start processing events" + "\n" + error });
-  }
+    try {
+      beginProcess();
+      res.status(200).send({ status: "Beginning process" });
+    } catch (error) {
+      res.status(500).send({ error: "Failed to start processing events" + "\n" + error });
+    }
   });
 };
