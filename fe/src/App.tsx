@@ -4,7 +4,7 @@ import { Header, SimulateEventButton, ToggleProcessingButton, CampaignsList, Tin
 import type { Campaign } from './types';
 import { io } from 'socket.io-client';
 
-export const socket = io('http://192.168.100.13:3000');
+export const socket = io('http://localhost:3000/');
 
 function App() {
 
@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     const fetchCampaigns = async () => {
-      const res = await axios.get('http://192.168.100.13:3000/campaigns')
+      const res = await axios.get('http://localhost:3000/campaigns')
 
       setCampaigns(res.data);
     }

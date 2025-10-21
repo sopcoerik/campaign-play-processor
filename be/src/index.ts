@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 import { client } from "./redis";
 import { registerRoutes } from "./controllers";
 import { createServer } from "http";
-import { campaignWorker } from "./worker";
 import { queue } from "./queue";
 
 dotenv.config();
@@ -14,7 +13,7 @@ export const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "http://localhost:5174",
     methods: ["GET", "POST"]
   }
 });
@@ -24,7 +23,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "*",
+    origin: ["http://localhost:5174"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
   })
 );
