@@ -40,6 +40,7 @@ export const registerRoutes = (app: Express) => {
   app.get("/stop_processing", (req: Request, res: Response) => {
     try {
       stopProcess();
+      console.log("Processing stopped by user");
       res.status(200).send({ status: "Processing stopped" });
     } catch (error) {
       res.status(500).send({ error: "Failed to stop processing events" + "\n" + error });
@@ -49,6 +50,7 @@ export const registerRoutes = (app: Express) => {
   app.get("/start_processing", (req: Request, res: Response) => {
     try {
       beginProcess();
+      console.log("Processing started by user");
       res.status(200).send({ status: "Beginning process" });
     } catch (error) {
       res.status(500).send({ error: "Failed to start processing events" + "\n" + error });
