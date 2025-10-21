@@ -2,7 +2,9 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Header, SimulateEventButton, ToggleProcessingButton, CampaignsList, TinyBarChart } from './components';
 import type { Campaign } from './types';
+import { io } from 'socket.io-client';
 
+export const socket = io('http://192.168.100.13:3000');
 
 function App() {
 
@@ -10,20 +12,21 @@ function App() {
 
   useEffect(() => {
     const fetchCampaigns = async () => {
-      const res = await axios.get('http://localhost:3000/campaigns')
+      const res = await axios.get('http://192.168.100.13:3000/campaigns')
 
       setCampaigns(res.data);
     }
-    
+
     fetchCampaigns();
 
-    let interval = -1;
+    socket.on('campaignsUpdated', () => {
+      console.log('Campaigns updated event received');
+      fetchCampaigns();
+    });
 
-    interval = setInterval(fetchCampaigns, 5000);
-
-    return () => clearInterval(interval);
+    return () => socket.disconnect() as unknown as void;
   }, [])
-  console.log('campaigns', campaigns);
+
   return (
     <main className='max-w-2xl px-4 py-24 mx-auto space-y-16'>
       <Header>

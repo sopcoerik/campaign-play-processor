@@ -78,7 +78,7 @@ export const SimulateEventButton: FC<SimulateEventButtonProps> = () => {
   const handleClick = async () => {
     setIsClicked(true);
 
-    await axios.post('http://localhost:3000/events', getRandomEvent());
+    await axios.post('http://localhost:3000/api/play', getRandomEvent());
 
     setIsClicked(false);
   }

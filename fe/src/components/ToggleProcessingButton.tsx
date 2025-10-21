@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useState } from "react";
+import { socket } from "../App";
 
 export const ToggleProcessingButton = () => {
 
@@ -8,16 +8,16 @@ export const ToggleProcessingButton = () => {
   let content = isStopped ? "Start processing" : "Stop processing";
 
   const handleClick = async () => {
-    if (isStopped) {
+    if (!isStopped) {
 
-      await axios.get('http://localhost:3000/start_processing');
-
-      setIsStopped(false);
-    } else {
-
-      await axios.get('http://localhost:3000/stop_processing');
+      socket.emit("stopProcessing");
 
       setIsStopped(true);
+    } else {
+
+      socket.emit("startProcessing");
+
+      setIsStopped(false);
     }
   }
 

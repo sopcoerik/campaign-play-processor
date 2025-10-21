@@ -9,7 +9,7 @@ export const registerRoutes = (app: Express) => {
     res.send("Server is running... Thank you for the opportunity!");
   });
 
-  app.post("/events", async (req: Request, res: Response) => {
+  app.post("/api/play", async (req: Request, res: Response) => {
     const event: PlayEvent = req.body;
     
     if (!event.campaign_id || !event.screen_id || !event.timestamp) {

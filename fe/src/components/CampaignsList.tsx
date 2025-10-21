@@ -16,7 +16,7 @@ export const CampaignsList:FC<CampaignsListProps> = ({ campaigns }) => {
   }
 
   return (
-    <div className="max-h-96 overflow-y-scroll">
+    <div className="max-h-96 overflow-y-scroll px-4">
       {renderCampaigns()}
     </div>
   )
