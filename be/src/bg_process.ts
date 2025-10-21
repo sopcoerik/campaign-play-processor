@@ -9,14 +9,16 @@ export const beginProcess = () => {
     try {
       const events: string[] = await client.lRange("events", 0, -1);
   
-      events.forEach(event => {
-        console.log("Processing event:", event);
-        const { campaign_id } = JSON.parse(event);
-        
-        client.hIncrBy("campaigns", campaign_id, 1);
-      });
+      await Promise.all(
+        events.map(event => {
+          console.log("Processing event:", event);
+          const { campaign_id } = JSON.parse(event);
+          
+          client.hIncrBy("campaigns", campaign_id, 1);
+        })
+      );
       
-      client.del("events");
+      await client.del("events");
 
     } catch (error) {
       console.error("Error processing events:", error);
