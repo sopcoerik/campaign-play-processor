@@ -22,7 +22,6 @@ export const beginProcess = () => {
 
     } catch (error) {
       console.error("Error processing events:", error);
-      throw error;
     }
 
   }, PROCESS_INTERVAL_MS);
