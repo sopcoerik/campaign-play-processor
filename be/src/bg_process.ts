@@ -7,7 +7,7 @@ export const beginProcess = () => {
 
   interval = setInterval(async () => {
     try {
-      const events: string[] = await client.lRange("events", 0, -1);
+      const events: string[] = await client.lRange("events", 0, 1000);
   
       await Promise.all(
         events.map(event => {
