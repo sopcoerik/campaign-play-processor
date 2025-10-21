@@ -1,5 +1,11 @@
 # Campaign Play Processor
 
+**IMPORTANT**
+I accidentally made some changes after I sent in the project to review.
+These changes should have been made on a /dev branch.
+The changes do not have the intention of altering decisions or trying to "clean up".
+The last commit for the sent version is **Commit f83dbed**
+
 ## Overview
 A full-stack system that simulates a DOOH (Digital Out-of-Home) ad platform. 
 Receives play events from digital screens, processes them asynchronously via 
