@@ -18,7 +18,7 @@ export const beginProcess = () => {
         })
       );
       
-      await client.lTrim("events", 1000, -1);
+      await client.lTrim("events", events.length, -1);
 
     } catch (error) {
       console.error("Error processing events:", error);
