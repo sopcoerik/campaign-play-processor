@@ -9,7 +9,7 @@ export const registerRoutes = (app: Express) => {
     res.send("Server is running... Thank you for the opportunity!");
   });
 
-  app.post("/events", (req: Request, res: Response) => {
+  app.post("/events", async (req: Request, res: Response) => {
     const event: PlayEvent = req.body;
 
     if (!event.campaign_id || !event.screen_id || !event.timestamp) {
@@ -17,7 +17,7 @@ export const registerRoutes = (app: Express) => {
     }
 
     try {
-      client.rPush("events", JSON.stringify(event));
+      await client.rPush("events", JSON.stringify(event));
       
       console.log("Event received: ", event);
       res.status(201).send({ status: "Event received" });
@@ -30,7 +30,7 @@ export const registerRoutes = (app: Express) => {
     try {
       const campaigns:Campaign = await client.hGetAll("campaigns");
 
-      res.status(201).send(campaigns);
+      res.status(200).send(campaigns);
     } catch (error) {
         res.status(500).send({ error: "Failed to retrieve campaigns" + "\n" + error });
       }
