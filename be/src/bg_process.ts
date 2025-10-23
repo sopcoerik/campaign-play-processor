@@ -1,9 +1,13 @@
 import { client } from "./redis";
 
 const PROCESS_INTERVAL_MS = 5000;
-let interval: NodeJS.Timeout = -1 as unknown as NodeJS.Timeout;
+let interval: NodeJS.Timeout | null = null;
 
-export const beginProcess = () => {
+export const beginProcess = (): void => {
+
+  if (interval !== null) {
+    return;
+  }
 
   interval = setInterval(async () => {
     try {
