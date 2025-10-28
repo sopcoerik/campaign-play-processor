@@ -1,28 +1,58 @@
-import axios from "axios";
-import { useState } from "react";
+import { useProcessState } from "../hooks/useProcessState";
+import type { ProcessState } from "../types";
+import { Notification } from "./Notification";
 
 export const ToggleProcessingButton = () => {
 
-  const [isStopped, setIsStopped] = useState(false);
+  const { processState, errorMessage, startProcessing, stopProcessing } = useProcessState();
 
-  let content = isStopped ? "Start processing" : "Stop processing";
+  const getContent = (processState: ProcessState) => {
 
-  const handleClick = async () => {
-    if (isStopped) {
+    switch (processState) {
+      case 'stopped':
+        return 'Start Processing';
+      case 'starting':
+        return 'Starting...';
+      case 'running':
+        return 'Stop Processing';
+      case 'stopping':
+        return 'Stopping...';
+    }
 
-      await axios.get('http://localhost:3000/start_processing');
+  }
 
-      setIsStopped(false);
-    } else {
+  const isDisabled = (processState: ProcessState) => processState === 'starting' || processState === 'stopping';
 
-      await axios.get('http://localhost:3000/stop_processing');
+  const handleClick = async (processState: ProcessState) => {
+    if (processState === 'stopped') {
 
-      setIsStopped(true);
+      await startProcessing();
+
+    } else if (processState === 'running') {
+
+      await stopProcessing();
+
     }
   }
 
-  return <button className='
-    text-amber-600 px-2 hover:opacity-80 cursor-pointer 
-    disbled:opacity-50 disabled:cursor-not-allowed
-  ' disabled={content === "Starting..." || content === "Stopping"} onClick={handleClick}>{content}</button>
+  return (
+    <>
+      <button
+        className='
+          text-amber-600 px-2 hover:opacity-80 cursor-pointer 
+          disabled:opacity-50 disabled:cursor-not-allowed
+        '
+        disabled={isDisabled(processState)}
+        onClick={() => handleClick(processState)}>
+        {getContent(processState)}
+      </button>
+      {
+        errorMessage
+        ? <Notification>
+            <span className="block sm:inline">{errorMessage}</span>
+          </Notification>
+        : null
+      }
+    </>
+  )
 }

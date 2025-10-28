@@ -7,7 +7,6 @@ type TinyBarChartProps = {
 };
 
 export const TinyBarChart: FC<TinyBarChartProps> = ({ campaigns }) => {
-
   const campaignsToChartData = () => {
     return Object.entries(campaigns).map(([key, value]) => ({
       name: key,

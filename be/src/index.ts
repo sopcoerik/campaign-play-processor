@@ -3,7 +3,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { client } from "./redis";
 import { registerRoutes } from "./controllers";
-import { beginProcess } from "./bg_process";
 
 dotenv.config();
 
@@ -28,10 +27,6 @@ app.listen(port, async () => {
     console.log("Connecting to Redis...");
     await client.connect();
     console.log("Connected to Redis");
-
-    console.log("Starting event processing...");
-    beginProcess();
-    console.log("Event processing started");
   } catch (error) {
     console.error("Error connecting:", error);
   }

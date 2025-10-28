@@ -1,11 +1,9 @@
 import { client } from "./redis";
 
 const PROCESS_INTERVAL_MS = 5000;
-let interval: NodeJS.Timeout = -1 as unknown as NodeJS.Timeout;
+let interval: NodeJS.Timeout | null = null;
 
-export const beginProcess = () => {
-
-  interval = setInterval(async () => {
+const processEvents = async () => {
     try {
       const events: string[] = await client.lRange("events", 0, 999);
   
@@ -23,9 +21,20 @@ export const beginProcess = () => {
     } catch (error) {
       console.error("Error processing events:", error);
     }
+};
 
-  }, PROCESS_INTERVAL_MS);
+export const beginProcess = (): { message: string } | undefined => {
+  if (interval) return { message: "Process is already running." };
 
+  interval = setInterval(processEvents, PROCESS_INTERVAL_MS);
 }
 
-export const stopProcess = () => clearInterval(interval);
+export const stopProcess = () => {
+  if (interval) {
+    clearInterval(interval);
+
+    interval = null;
+  }
+}
+
+export const isProcessing = () => interval !== null;

@@ -1,0 +1,1 @@
+export type ProcessState = 'running' | 'stopped' | 'starting' | 'stopping';
