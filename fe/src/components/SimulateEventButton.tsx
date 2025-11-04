@@ -63,7 +63,11 @@ const getRandomEvent = () => {
   const campaign_id = campaignIds[Math.floor(Math.random() * campaignIds.length)];
   const timestamp = new Date().toISOString();
 
-  return { screen_id, campaign_id, timestamp } as PlayEvent;
+  return {
+    screen_id,
+    campaign_id,
+    timestamp
+  } as PlayEvent;
 }
 
 type SimulateEventButtonProps = {
@@ -83,8 +87,14 @@ export const SimulateEventButton: FC<SimulateEventButtonProps> = () => {
     setIsClicked(false);
   }
 
-  return <button className='
-    text-emerald-600 px-2 hover:opacity-80 cursor-pointer 
-    disbled:opacity-50 disabled:cursor-not-allowed
-  ' disabled={isClicked} onClick={handleClick}>{isClicked ? 'Simulating...' : 'Simulate Event'}</button>
+  const content: string = isClicked ? 'Simulating...' : 'Simulate Event'
+
+  return (
+    <button className='
+      text-emerald-600 px-2 hover:opacity-80 cursor-pointer 
+      disbled:opacity-50 disabled:cursor-not-allowed
+    ' disabled={isClicked} onClick={handleClick}>
+      {content}
+    </button>
+  )
 }

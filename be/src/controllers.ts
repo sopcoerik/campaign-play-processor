@@ -1,8 +1,7 @@
 import { Express, Request, Response } from "express";
-
-import { beginProcess, stopProcess } from "./bg_process";
 import { client } from "./redis";
 import { Campaign, PlayEvent } from "./types";
+import { isProcessing, stopProcess, beginProcess } from "./bg_process";
 
 export const registerRoutes = (app: Express) => {
   app.get("/", (req: Request, res: Response) => {
@@ -37,7 +36,19 @@ export const registerRoutes = (app: Express) => {
     }
   );
 
-  app.get("/stop_processing", (req: Request, res: Response) => {
+  app.get("/process_state", (req: Request, res: Response) => {
+    try {
+      if (isProcessing()) {
+        res.status(200).send({ state: "running" });
+      } else {
+        res.status(200).send({ state: "stopped" });
+      }
+    } catch (error) {
+      res.status(500).send({ error: "Failed to get process state" + "\n" + error });
+    }
+  });
+
+  app.post("/stop_processing", (req: Request, res: Response) => {
     try {
       stopProcess();
       console.log("Processing stopped by user");
@@ -47,11 +58,15 @@ export const registerRoutes = (app: Express) => {
     }
   });
 
-  app.get("/start_processing", (req: Request, res: Response) => {
+  app.post("/start_processing", (req: Request, res: Response) => {
     try {
-      beginProcess();
-      console.log("Processing started by user");
-      res.status(200).send({ status: "Beginning process" });
+      const error = beginProcess();
+      if (error?.message) {
+        return res.status(400).send(error.message);
+      } else {
+        console.log("Processing started by user");
+        res.status(200).send({ status: "Beginning process" });
+      }
     } catch (error) {
       res.status(500).send({ error: "Failed to start processing events" + "\n" + error });
     }
