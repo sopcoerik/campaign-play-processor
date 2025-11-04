@@ -1,7 +1,7 @@
 import { Bar, BarChart } from "recharts";
-import type { Campaign } from "../types";
+import type { Campaign } from "@/types";
 import type { FC } from "react";
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "./ui/chart";
+import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components";
 
 type TinyBarChartProps = {
   campaigns: Campaign;

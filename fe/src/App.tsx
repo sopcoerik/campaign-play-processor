@@ -1,5 +1,5 @@
-import { Header, SimulateEventButton, ToggleProcessingButton, CampaignsList, TinyBarChart } from './components';
-import { useCampaigns } from './hooks/useCampaigns';
+import { Header, SimulateEventButton, ToggleProcessingButton, CampaignsList, TinyBarChart } from '@/components';
+import { useCampaigns } from '@/hooks';
 
 function App() {
 

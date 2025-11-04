@@ -9,7 +9,7 @@ export const useCampaigns = () => {
 
   useEffect(() => {
     const fetchCampaigns = async () => {
-      const res = await axios.get('http://localhost:3000/campaigns')
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/campaigns`)
 
       setCampaigns(res.data);
     }

@@ -1,6 +1,6 @@
-import { useProcessState } from "../hooks/useProcessState";
-import type { ProcessState } from "../types";
-import { Notification } from "./Notification";
+import { useProcessState } from "@/hooks";
+import type { ProcessState } from "@/types";
+import { Notification } from "@/components";
 
 export const ToggleProcessingButton = () => {
 

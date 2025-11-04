@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, type FC } from "react";
-import type { PlayEvent } from "../types";
+import type { PlayEvent } from "@/types";
 
 const screenIds: string[] = [
   "screen-101",
@@ -82,7 +82,7 @@ export const SimulateEventButton: FC<SimulateEventButtonProps> = () => {
   const handleClick = async () => {
     setIsClicked(true);
 
-    await axios.post('http://localhost:3000/events', getRandomEvent());
+    await axios.post(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/events`, getRandomEvent());
 
     setIsClicked(false);
   }

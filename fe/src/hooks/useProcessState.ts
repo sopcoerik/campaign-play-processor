@@ -9,7 +9,7 @@ export const useProcessState = () => {
   useEffect(() => {
     const fetchProcessState = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/process_state');
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/process_state`);
 
         setProcessState(res.data.state);
       } catch (error) {
@@ -35,7 +35,7 @@ export const useProcessState = () => {
   const startProcessing = async () => {
     try {
       setProcessState('starting');
-      await axios.post('http://localhost:3000/start_processing');
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/start_processing`);
       setProcessState('running');
     } catch (error) {
       console.error("Failed to start processing:", error);
@@ -53,7 +53,7 @@ export const useProcessState = () => {
   const stopProcessing = async () => {
     try {
       setProcessState('stopping');
-      await axios.post('http://localhost:3000/stop_processing');
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/stop_processing`);
       setProcessState('stopped');
     } catch (error) {
       console.error("Failed to stop processing:", error);
