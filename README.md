@@ -95,12 +95,6 @@ Essential for hot-reloading the server when a change is made in the code.
 #### dotenv
 For using environment files in the project.
 
-## Time Spent
-- **Learning & Research:** ~3 hours (Redis fundamentals, architecture planning)
-- **Core implementation:** ~3 hours (endpoints, queue processing, basic UI)
-- **Polish & bonus features:** ~3 hours (pause/resume, charts, refactoring, testing)
-- **Total development time:** ~6 hours active coding, ~3 hours research
-
 ## Known issues/Future improvements
 As of right now, I didn't find big issues that would harm the
 functionality of the application.
